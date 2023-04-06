@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Movies>
+    <Movie>
+        <Name>Джентельмены</Name>
+        <Coordinates>
+            <x>1.0</x>
+            <y>2.0</y>
+        </Coordinates>
+        <OscarsCount>1</OscarsCount>
+        <Genre>DRAMA</Genre>
+        <MpaaRating>G</MpaaRating>
+        <Operator>
+            <Name>Гай Ричи</Name>
+            <Height>180</Height>
+            <EyeColor>GREEN</EyeColor>
+            <Nationality>FRANCE</Nationality>
+            <Location>
+                <x>10.0</x>
+                <y>10.0</y>
+                <z>20</z>
+                <Name>Англия</Name>
+            </Location>
+        </Operator>
+    </Movie>
+    <Movie>
+        <Name>Джентельмены</Name>
+        <Coordinates>
+            <x>1.0</x>
+            <y>2.0</y>
+        </Coordinates>
+        <OscarsCount>1</OscarsCount>
+        <Genre>DRAMA</Genre>
+        <MpaaRating>G</MpaaRating>
+        <Operator>
+            <Name>Гай Ричи</Name>
+            <Height>180</Height>
+            <EyeColor>GREEN</EyeColor>
+            <Nationality>FRANCE</Nationality>
+            <Location>
+                <x>10.0</x>
+                <y>10.0</y>
+                <z>20</z>
+                <Name>Англия</Name>
+            </Location>
+        </Operator>
+    </Movie>
+</Movies>
