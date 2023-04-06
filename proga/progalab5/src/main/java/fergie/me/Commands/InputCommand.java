@@ -4,7 +4,7 @@ import fergie.me.CollectionManager;
 
 import java.util.Scanner;
 
-public class InputCommand extends CollectionCommand{
+public abstract class InputCommand extends CollectionCommand {
     protected Scanner scanner;
 
     public InputCommand(CollectionManager collectionManager, Scanner scanner) {
