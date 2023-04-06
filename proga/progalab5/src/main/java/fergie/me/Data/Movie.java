@@ -64,7 +64,7 @@ public class Movie implements Comparable<Movie> {
 
     public void setName(String name) throws InvalidAttributeValueException {
         if (name == null || name.equals("")) {
-            throw new InvalidAttributeValueException("Имя фильма не может быть пустым");
+            throw new InvalidAttributeValueException("имя фильма не может быть пустым");
         } else {
             this.name = name;
         }

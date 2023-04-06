@@ -2,6 +2,7 @@ package fergie.me;
 
 import fergie.me.Commands.*;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -9,8 +10,7 @@ import java.util.Scanner;
 public class CommandManager {
     private CollectionManager collectionManager;
 
-    public Map<String, Command> commands = new HashMap<>();
-
+    private final Map<String, Command> commands = new HashMap<>();
 
     public CommandManager(CollectionManager collectionManager, Scanner scanner) {
         this.collectionManager = collectionManager;
@@ -18,10 +18,10 @@ public class CommandManager {
         Command addElement = new AddElement(collectionManager, scanner);
         Command info = new Info(collectionManager);
         Command clear = new Clear(collectionManager);
-        Command addIfMin = new AddIfMin(collectionManager);
+        Command addIfMin = new AddIfMin(collectionManager, scanner);
         Command help = new Help(collectionManager, commands);
         Command show = new Show(collectionManager);
-        Command countGreaterThanGenre = new CountGreaterThanGenre();
+        Command countGreaterThanGenre = new CountGreaterThanGenre(collectionManager, scanner);
         Command executeScript = new ExecuteScript();
         Command removeByID = new RemoveById(collectionManager);
 
@@ -37,7 +37,7 @@ public class CommandManager {
         commands.put("addIfMin", addIfMin);
         commands.put("removeById", new RemoveById(collectionManager));
         commands.put("removeHead", new RemoveHead(collectionManager));
-        commands.put("removeGreater", new RemoveGreater(collectionManager));
+        commands.put("removeGreater", new RemoveGreater(collectionManager, scanner));
         commands.put("sumOfOscarsCount", new SumOfOscarsCount(collectionManager));
         commands.put("save", new Save());
         commands.put("executeScript", new ExecuteScript());
@@ -54,11 +54,7 @@ public class CommandManager {
 //    }
 
 
-
-
-
-    public boolean execute(String[] commandArgs) {
-        return true;
+    public Map<String, Command> getCommands() {
+        return commands;
     }
-    //через switch case или hashmap
 }

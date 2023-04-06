@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Movies>
     <Movie>
+        <ID>1</ID>
         <Name>Джентельмены</Name>
         <Coordinates>
             <x>1.0</x>

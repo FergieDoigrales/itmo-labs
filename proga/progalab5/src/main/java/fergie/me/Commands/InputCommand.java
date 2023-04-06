@@ -11,8 +11,4 @@ public class InputCommand extends CollectionCommand{
         super(collectionManager);
         this.scanner = scanner;
     }
-    public InputCommand(CollectionManager collectionManager) {
-        super(collectionManager);
-
-    }
 }

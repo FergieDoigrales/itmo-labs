@@ -1,13 +1,22 @@
 package fergie.me;
 
 import fergie.me.Data.Coordinates;
-import fergie.me.Data.Country;
 import fergie.me.Data.Movie;
 import fergie.me.Data.MovieGenre;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 import javax.management.InvalidAttributeValueException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -19,64 +28,55 @@ public class Parser {
     private String field = "<(\\w+)>(.+)</\\w+>";
     private Pattern pattern = Pattern.compile(field);
                                                                     //throws invalidAttributeValueExcep?
-    public List<Movie> readFromFile(String fileName) throws FileNotFoundException, InvalidAttributeValueException {
+    public List<Movie> readFromFile(String fileName) throws IOException, InvalidAttributeValueException, ParserConfigurationException, SAXException {
         List<Movie> movies = new ArrayList<>();
         scanner = new Scanner(new File("src\\main\\java\\fergie\\me\\" + fileName));
 
+        StringBuilder xml = new StringBuilder();
+        while (scanner.hasNextLine()) {
+            xml.append(scanner.nextLine());
+        }
+
+
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder builder = factory.newDocumentBuilder();
+
+        Document doc = builder.parse(new InputSource(xml.toString()));
+        doc.getDocumentElement().normalize();
+
+
         Movie movie = new Movie();
 
-        while (scanner.hasNextLine()) {
-            String s = scanner.nextLine().trim();
+        NodeList nodeList = doc.getDocumentElement().getChildNodes();
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Node node = nodeList.item(i);
 
-            if (s.equals("<Movie>")) {
-                movie = new Movie();
-                continue;
+            if (node.getNodeType() == Node.ELEMENT_NODE) {
+                Element elem = (Element) node;
+
+                // Get the value of the ID attribute.
+                String ID = node.getAttributes().getNamedItem("ID").getNodeValue();
+
+                // Get the value of all sub-elements.
+                String name = elem.getElementsByTagName("Name")
+                        .item(0).getChildNodes().item(0).getNodeValue();
+
+                String lastname = elem.getElementsByTagName("Lastname").item(0)
+                        .getChildNodes().item(0).getNodeValue();
+
+                Integer age = Integer.parseInt(elem.getElementsByTagName("Age")
+                        .item(0).getChildNodes().item(0).getNodeValue());
+
+                Double salary = Double.parseDouble(elem.getElementsByTagName("Salary")
+                        .item(0).getChildNodes().item(0).getNodeValue());
+
+//                movies.add(new Movie(ID, name, lastname, age, salary));
             }
-
-            if (s.equals("Coordinates>")) {
-                Coordinates coordinates = readCoordinates();
-                movie.setCoordinates(coordinates);
-            }
-
-            Matcher matcher = pattern.matcher(s);
-            if (matcher.matches()) {
-                String fieldName = matcher.group(1);
-                String fieldValue = matcher.group(2);
-                if (fieldName.equalsIgnoreCase("Name")) {
-                    movie.setName(fieldValue);
-                } else if (fieldName.equals("x")) {
-//                    try {
-//                        Double.parseDouble(fieldValue);
-//                    } catch (NumberFormatException e) {
-//                        throw e;
-//                    }
-                } else if (fieldName.equals("Country")) {
-                    MovieGenre.valueOf("DRAMA");
-                    movie.setGenre(MovieGenre.DRAMA);
-                }
-            }
-
         }
+
+
+
 
         return movies;
     }
-
-    private Coordinates readCoordinates() throws InvalidAttributeValueException{ //try catch там, где выз. парсер
-        Coordinates coordinates = new Coordinates();
-        String s;
-        while((s = scanner.nextLine()) != "</Coordinates>") {
-            Matcher matcher = pattern.matcher(s);
-            String fieldName = matcher.group(1);
-            String fieldValue = matcher.group(2);
-
-            if (fieldName.equals("x")) {
-                coordinates.setX(Double.parseDouble(fieldValue));
-            } else if(fieldName.equals("y")) {
-                coordinates.setY(Float.parseFloat(fieldValue));;
-            }
-        }
-
-        return coordinates;
-    }
-
 }
