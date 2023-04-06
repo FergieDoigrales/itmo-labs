@@ -1,6 +1,7 @@
 package fergie.me;
 
 import fergie.me.Data.Movie;
+import fergie.me.Data.MovieGenre;
 
 import java.time.LocalDate;
 import java.util.*;
@@ -15,7 +16,7 @@ public class CollectionManager {
 
     public CollectionManager() {
         initializationDate = LocalDate.now();
-        arrayDeque = new ArrayDeque<Movie>();
+        arrayDeque = new ArrayDeque<>();
         className = arrayDeque.getClass().getName();
         currency = arrayDeque.size();
     }
@@ -58,8 +59,12 @@ public class CollectionManager {
     }
 
     public void addIfMin(Movie movie) {
-        //Movie minMovie = Collections.min(arrayDeque);
-        Movie minMovie = findMin();
+        if (arrayDeque.isEmpty()) {
+            arrayDeque.add(movie);
+            return;
+        }
+
+        Movie minMovie = Collections.min(arrayDeque);
         if (movie.compareTo(minMovie) < 0) {
             arrayDeque.add(movie);
         } else
@@ -96,12 +101,22 @@ public class CollectionManager {
         this.arrayDeque.remove(del);
     }
 
-    public int SumOfOscarsCount() {
+    public int sumOfOscarsCount() {
         int oscars = 0;
         for (Movie movie : this.arrayDeque) {
             oscars += movie.getOscarsCount();
         }
         return oscars;
+    }
+
+    public Integer countGreaterThanGenre(MovieGenre genre) {
+        Integer count = 0;
+        for (Movie movie: arrayDeque) {
+            if (movie.getGenre().getGenreNum() > genre.getGenreNum()) {
+                count++;
+            }
+        }
+        return count;
     }
 
     public void show() {
@@ -112,14 +127,7 @@ public class CollectionManager {
         if (arrayDeque.size() == 0)
             System.out.println("Коллекция пуста.");
     }
-    public Movie findMin(){
-        Movie temp = arrayDeque.getFirst();
-        for (Movie movie : arrayDeque){
-             if (movie.compareTo(temp) < 0)
-                temp = movie;
-        }
-        return temp;
-    }
+
     // создать новую коллекцию без этого элемента
     public LocalDate getInitializationDate() {
         return initializationDate;

@@ -1,5 +1,9 @@
 package fergie.me;
 
+import fergie.me.Data.Movie;
+
+import java.io.FileNotFoundException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -18,8 +22,9 @@ public class Main {
 //        } catch (NumberFormatException e) {
 //            System.out.println("Н");
 //        }
+
         while (true) {
-            try {
+
                 String s = scanner.next();
                 scanner.nextLine();
 
@@ -27,10 +32,8 @@ public class Main {
                     break;
                 }
 
-                commandManager.commands.get(s).execute(); //почему-то не работат addIfMin
-            } catch (NullPointerException e) {
-                System.out.println("Вы ввели несуществующую команду.");
-            }
+                commandManager.getCommands().get(s).execute();
+
         }
 
 

@@ -18,7 +18,7 @@ public class Help extends CollectionCommand implements Command{
     }
 
     public void execute(){
-        for( Command cmd: map.values()) {
+        for (Command cmd: map.values()) {
             System.out.println(cmd.getDescription() + "\n");
         }
         //CommandManager.help();

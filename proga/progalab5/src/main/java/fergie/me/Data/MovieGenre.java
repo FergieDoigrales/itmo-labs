@@ -5,7 +5,7 @@ public enum MovieGenre {
     DRAMA(2),
     TRAGEDY(3);
 
-    private Long id;
+    private final Long id;
 
     public Long getGenreNum() {
         return id;

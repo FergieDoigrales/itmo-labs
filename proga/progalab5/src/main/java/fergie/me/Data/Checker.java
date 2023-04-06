@@ -22,7 +22,6 @@ public class Checker {
             } catch (IllegalArgumentException e) {
                 System.out.println("Введено неправильное значение из справочника");
             }
-
         }
     }
 
