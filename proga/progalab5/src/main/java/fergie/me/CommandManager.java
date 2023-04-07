@@ -26,8 +26,7 @@ public class CommandManager {
         Command removeByID = new RemoveById(collectionManager);
 
 
-
-
+        commands.put("exit", new Exit());
         commands.put("update", update);
         commands.put("add", addElement);
         commands.put("show", show);

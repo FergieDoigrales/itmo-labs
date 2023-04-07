@@ -1,8 +1,10 @@
 package fergie.me.Data;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 import javax.management.InvalidAttributeValueException;
 import java.util.Objects;
-
+@XmlRootElement
 public class Coordinates {
     private double x;
     private Float y; //Поле не может быть null

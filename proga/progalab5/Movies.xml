@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<fileManager>
+    <movies>
+        <coordinates>
+            <x>12.0</x>
+        </coordinates>
+        <genre>ACTION</genre>
+        <id>1</id>
+        <mpaaRating>NC_17</mpaaRating>
+        <name>Titanik</name>
+        <operator>
+            <eyeColor>GREEN</eyeColor>
+            <height>8</height>
+            <location>
+                <name>Avstria</name>
+                <x>45.0</x>
+                <y>21.0</y>
+                <z>12</z>
+            </location>
+            <name>Tim</name>
+            <nationality>FRANCE</nationality>
+        </operator>
+        <oscarsCount>2</oscarsCount>
+    </movies>
+</fileManager>

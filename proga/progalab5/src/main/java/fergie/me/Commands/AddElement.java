@@ -15,7 +15,7 @@ public class AddElement extends InputCommand implements Command {
 
     public void execute() {
 
-        this.collectionManager.add(Movie.createNewMovie(this.scanner));
+        this.collectionManager.addElement(Movie.createNewMovie(this.scanner));
     }
     public String getDescription(){
         return description;

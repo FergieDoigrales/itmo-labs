@@ -1,9 +1,10 @@
 package fergie.me.Data;
 
 import fergie.me.Commands.Info;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 import javax.management.InvalidAttributeValueException;
-
+@XmlRootElement
 public class Person {
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Long height; //Поле может быть null, Значение поля должно быть больше 0

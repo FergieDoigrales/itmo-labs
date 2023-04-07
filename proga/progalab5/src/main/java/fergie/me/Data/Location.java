@@ -1,10 +1,11 @@
 package fergie.me.Data;
 
 import fergie.me.Exceptions.CannotBeNullException;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 import javax.management.InvalidAttributeValueException;
 import java.util.Objects;
-
+@XmlRootElement
 public class Location {
     private float x;
     private float y;

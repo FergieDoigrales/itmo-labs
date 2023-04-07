@@ -2,13 +2,16 @@ package fergie.me;
 
 import fergie.me.Data.Movie;
 import fergie.me.Data.MovieGenre;
+import jakarta.xml.bind.annotation.XmlElement;
 
 import java.time.LocalDate;
 import java.util.*;
 
 public class CollectionManager {
-    private final ArrayDeque<Movie> arrayDeque;
+
+    protected ArrayDeque<Movie> arrayDeque; // change private ---> protected
     private LocalDate initializationDate;
+
     private long current_id = 1;
     private long currency = 0;
     String className;
@@ -21,6 +24,10 @@ public class CollectionManager {
         currency = arrayDeque.size();
     }
 
+    public CollectionManager(FileManager fileManager){
+        this.arrayDeque = fileManager.arrayDeque;
+    }
+
     public void addAll(Collection<Movie> collection) {
         for (Movie movie : collection) {
             movie.setId(current_id);
@@ -29,7 +36,7 @@ public class CollectionManager {
         }
     }
 
-    public void add(Movie movie) {
+    public void addElement(Movie movie) {
         movie.setId(current_id);
         arrayDeque.add(movie);
         current_id++;
@@ -79,7 +86,6 @@ public class CollectionManager {
                 moviesForDelete.add(m);
             }
         }
-
         arrayDeque.removeAll(moviesForDelete);
     }
 

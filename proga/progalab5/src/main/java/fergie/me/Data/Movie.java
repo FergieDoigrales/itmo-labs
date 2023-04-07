@@ -1,17 +1,20 @@
 package fergie.me.Data;
 
+import jakarta.xml.bind.annotation.XmlRootElement;
+
 import javax.management.InvalidAttributeValueException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
-
+@XmlRootElement
 public class Movie implements Comparable<Movie> {
     private Long id; //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным, Значение этого поля должно генерироваться автоматически
     private String name; //Поле не может быть null, Строка не может быть пустой
     private Coordinates coordinates; //Поле не может быть null
-    private java.time.LocalDate creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
+    private String creationDate; //Поле не может быть null, Значение этого поля должно генерироваться автоматически
     private Long oscarsCount; //Значение поля должно быть больше 0, Поле не может быть null
     private MovieGenre genre; //Поле не может быть null
     private MpaaRating mpaaRating; //Поле может быть null
@@ -25,7 +28,7 @@ public class Movie implements Comparable<Movie> {
 
 
 
-    public Movie(long id, String name, Coordinates coordinates, java.time.LocalDate creationDate, Long oscarsCount, MovieGenre genre, MpaaRating mpaaRating, Person operator) {
+    public Movie(long id, String name, Coordinates coordinates, String creationDate, Long oscarsCount, MovieGenre genre, MpaaRating mpaaRating, Person operator) {
         //setId();
         this.id = id;
         this.name = name;
@@ -81,12 +84,12 @@ public class Movie implements Comparable<Movie> {
             this.coordinates = coordinates;
     }
 
-    public java.time.LocalDate getCreationDate() {
+    public String getCreationDate() {
         return creationDate;
     }
 
     public void setCreationDate(java.time.LocalDate creationDate) {
-        this.creationDate = creationDate;
+        this.creationDate = creationDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
     }
 
     public Long getOscarsCount() {
@@ -266,6 +269,7 @@ public class Movie implements Comparable<Movie> {
 
     @Override
     public int compareTo(Movie movie) {
-        return Objects.equals(this.getOscarsCount(), movie.getOscarsCount()) ? 0 : this.getOscarsCount().compareTo(movie.getOscarsCount());
+        return Objects.equals(this.getOscarsCount(), movie.getOscarsCount()) ? 0 :
+                this.getOscarsCount().compareTo(movie.getOscarsCount());
     }
 }

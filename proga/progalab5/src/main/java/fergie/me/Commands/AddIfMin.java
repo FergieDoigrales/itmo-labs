@@ -16,8 +16,6 @@ public class AddIfMin extends InputCommand implements Command {
     public void execute(){
         Movie movie = Movie.createNewMovie(scanner);
         collectionManager.addIfMin(movie);
-       // if (movie.compareTo(collectionManager.findMin()) < 1)
-               // collectionManager.add(movie);
 
     };
     public String getDescription(){
